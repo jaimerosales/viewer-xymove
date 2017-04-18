@@ -26,22 +26,16 @@ import './Gallery.css';
 
 const tilesData = [
   {
-    img: 'images/wall-ac-unit-one.png',
-    title: 'wall_1_tonnage',
+    img: 'images/server-rack.png',
+    title: 'Server Rack',
     key: '0001',
-    urn:'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3dhbGxfMV90b25uYWdlLmYzZA'
+    urn:'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3JhY2tfYXNzLmYzZA'
   },
   {
-    img: 'images/wall-ac-unit-two.png',
-    title: 'Wall type',
+    img: 'images/cabinet.png',
+    title: 'Cabinet',
     key: '0002',
-    urn: 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3dhbGwtdHlwZS12NC5mM2Q'
-  },
-  {
-    img: 'images/floor-ac-unit.png',
-    title: 'Floor-Exposed-1_Tonnage',
-    key: '0003',
-    urn: 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0Zsb29yLUV4cG9zZWQtMV9Ub25uYWdlLmYzZA'
+    urn: 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0NhYmluZXQuemlw'
   }
 ];
 

@@ -24,8 +24,8 @@ import './Viewer.css';
 class Viewer extends Component {
 
     componentDidMount() {
-        // Revit Apartment
-        var documentId = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0FwYXJ0bWVudC1GdXJuaXNoZWQucnZ0';
+        // Revit DataCenter
+        var documentId = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L2RhdGFjZW50ZXIucnZ0';
         Helpers.launchViewer(documentId);         
     }  
 

@@ -148,98 +148,43 @@ function onSelection (event) {
     }
 }
 
-
-
-
-function wallOneTransform(){
-
-        var transform = {
-            translation: new THREE.Vector3(0.0, 0.0, 0.0),
-            rotation: new THREE.Vector3(0.0, 0.0, 0.0),
-            scale: new THREE.Vector3(0.08, 0.08, 0.08)
-        }
-        switch (pointData.face.normal.x * pointData.face.normal.y === 0){
-        case (pointData.face.normal.x === 0 && Math.round(pointData.face.normal.y) === 1):
-            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y+0.3, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 180, 0);
-            console.log('Inside Y = 1 Wall');
-            break;
-        case (pointData.face.normal.x === 0 && Math.round(pointData.face.normal.y) === -1) :
-            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y-0.3, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 0, 0);
-            console.log('Inside Y = -1 Wall');
-            break;
-        case (Math.round(pointData.face.normal.x) === 1 && pointData.face.normal.y === 0):
-            transform.translation = new THREE.Vector3(pointData.point.x+0.3 , pointData.point.y, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 90, 0);
-            console.log('Inside X = 1 Wall');
-            break;
-        case (Math.round(pointData.face.normal.x) === -1 && pointData.face.normal.y === 0):
-            transform.translation = new THREE.Vector3(pointData.point.x-0.35 , pointData.point.y, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 270, 0);
-            console.log('Inside X = -1 Wall');
-            break;
-        default:
-            alert('You need to select one of the walls for this AC Unit');
-        }
-        return transform
-        
- 
-}
-
-function wallTwoTransform(){
+function serverTransform(){
    
         var transform = {
-            translation: new THREE.Vector3(0.0, 0.0, 0.0),
-            rotation: new THREE.Vector3(0.0, 0.0, 0.0),
-            scale: new THREE.Vector3(0.08, 0.08, 0.08)
-        }
-        switch (pointData.face.normal.x * pointData.face.normal.y === 0){
-        case (pointData.face.normal.x === 0 && Math.round(pointData.face.normal.y) === 1):
-            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y+0.2, pointData.point.z);
-            transform.rotation = new THREE.Vector3(270, 0, 180);
-            console.log('Inside Y = 1 Wall');
-            break;
-        case (pointData.face.normal.x === 0 && Math.round(pointData.face.normal.y) === -1) :
-            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y-0.2, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 0, 0);
-            console.log('Inside Y = -1 Wall');
-            break;
-        case (Math.round(pointData.face.normal.x) === 1 && pointData.face.normal.y === 0):
-            transform.translation = new THREE.Vector3(pointData.point.x +0.2 , pointData.point.y, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 90, 0);
-            console.log('Inside X = 1 Wall');
-            break;
-        case (Math.round(pointData.face.normal.x) === -1 && pointData.face.normal.y === 0):
-            transform.translation = new THREE.Vector3(pointData.point.x - 0.2 , pointData.point.y, pointData.point.z);
-            transform.rotation = new THREE.Vector3(90, 270, 0);
-            console.log('Inside X = -1 Wall');
-            break;
-        default:
-            alert('You need to select one of the walls for this AC Unit');
-        }
-        return transform
- 
-}
-
-
-function floorTransform(){
-    var transform = {
         translation: new THREE.Vector3(0.0, 0.0, 0.0),
         rotation: new THREE.Vector3(90.0, 0.0, 0.0),
-        scale: new THREE.Vector3(0.08, 0.08, 0.08)
+        scale: new THREE.Vector3(0.003, 0.003, 0.003)
     }
-        console.log(transform);
+        //console.log(transform);
         if (pointData.face.normal.x === 0 && pointData.face.normal.y === 0 ){
-            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y , pointData.point.z+1);
+            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y , pointData.point.z+2.5);
             console.log('Clipped to Floor Z axis');
         }
         else {
             alert('You need to select a point on the Floor');
         }
         return transform;
+ 
 }
 
+function cabinetTransform(){
+   
+        var transform = {
+        translation: new THREE.Vector3(0.0, 0.0, 0.0),
+        rotation: new THREE.Vector3(0.0, 0.0, 0.0),
+        scale: new THREE.Vector3(0.0025,0.0025,0.0025)
+    }
+        //console.log(transform);
+        if (pointData.face.normal.x === 0 && pointData.face.normal.y === 0 ){
+            transform.translation = new THREE.Vector3(pointData.point.x , pointData.point.y , pointData.point.z+1.25);
+            console.log('Clipped to Floor Z axis');
+        }
+        else {
+            alert('You need to select a point on the Floor');
+        }
+        return transform;
+ 
+}
 
 function loadModel(viewables, lmvDoc, indexViewable) {
 
@@ -256,29 +201,22 @@ function loadModel(viewables, lmvDoc, indexViewable) {
         viewer.loadModel(svfUrl, modelOptions, (model) => {
             
             switch (lmvDoc.myData.status.toString() === "success" ) {
-            case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3dhbGxfMV90b25uYWdlLmYzZA"):
+            case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3JhY2tfYXNzLmYzZA"):
                 
                 panel = viewer.getExtension(ModelTransformerExtension).panel;
-                panel.setTransform(wallOneTransform());
+                panel.setTransform(serverTransform());
                 panel.applyTransform(model);
-                modelName = "wall-ac-unit-one.f3d"    
+                modelName = "serverRack.f3d"    
                 break;
-            case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3dhbGwtdHlwZS12NC5mM2Q"):
+            case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0NhYmluZXQuemlw"):
                 
                 panel = viewer.getExtension(ModelTransformerExtension).panel;
-                panel.setTransform(wallTwoTransform()); 
+                panel.setTransform(cabinetTransform()); 
                 panel.applyTransform(model); 
-                modelName = "wall-ac-unit-two.f3d"
-                break;
-            case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0Zsb29yLUV4cG9zZWQtMV9Ub25uYWdlLmYzZA"):
-                panel = viewer.getExtension(ModelTransformerExtension).panel;
-                panel.setTransform(floorTransform());
-                panel.applyTransform(model);
-                modelName = "floor-ac-unit.f3d"
+                modelName = "Cabinet.iam"
                 break;
             default:
-                //viewer.impl.toggleCelShading(true);
-                modelName = "Apartment.rvt";
+                modelName = "fabric.rvt";
             }
 
             model.name = modelName;
