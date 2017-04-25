@@ -74,17 +74,16 @@ class Gallery extends Component {
                   <div className="tile-title">{tile.title}</div>
                   
                   <div className="tile-buttons"> 
-                  <a href="#" className="tile-arrows" onClick={this.onLeftSelect.bind(this, tile)}>
-                    <i className="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
-                  </a> 
-                   <a href="#" className="tile-arrows" onClick={this.onTileSelect.bind(this, tile)}>
-                    <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
-                  </a> 
-                  <a href="#"  onClick={this.onRightSelect.bind(this, tile)}>
-                     <i className="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
-                  </a>
-                 </div>
-                
+                    <a href="#" className="tile-arrows" onClick={this.onLeftSelect.bind(this, tile)}>
+                      <i className="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                    </a> 
+                    <a href="#" className="tile-arrows" onClick={this.onTileSelect.bind(this, tile)}>
+                      <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
+                    </a> 
+                    <a href="#"  onClick={this.onRightSelect.bind(this, tile)}>
+                      <i className="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+                    </a>
+                  </div>
                 </div>
               )
             )}

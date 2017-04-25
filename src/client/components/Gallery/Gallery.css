@@ -1,12 +1,12 @@
 .forge-gallery {
   position: absolute;
   z-index: 2;
-  top: 23%;
+  top: 30%;
   left: 1%; }
 
 .forge-gallery .tile {
   border-radius: 5px;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   position: relative; }
 
 .forge-gallery .tile .tile-avatar {
@@ -35,9 +35,6 @@
   font-size: 1em;
   padding: 0.5em .8em;
   position: absolute; }
-
-a {
-  color: hotpink; }
 
 .tile-arrows {
   margin-right: 3.4em; }
