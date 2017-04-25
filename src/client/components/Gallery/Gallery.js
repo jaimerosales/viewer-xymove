@@ -29,12 +29,14 @@ const tilesData = [
     img: 'images/server-rack.png',
     title: 'Server Rack',
     key: '0001',
+    position: '0',
     urn:'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3JhY2tfYXNzLmYzZA'
   },
   {
     img: 'images/cabinet.png',
     title: 'Cabinet',
     key: '0002',
+    position: '0',
     urn: 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0NhYmluZXQuemlw'
   }
 ];
@@ -44,7 +46,20 @@ class Gallery extends Component {
 
   onTileSelect(tile, e) {
     e.preventDefault();
-    Helpers.loadNextModel(tile.urn)
+    tile.position = '0';
+    Helpers.loadNextModel(tile.urn,tile.position)
+  }
+
+  onRightSelect (tile, e){
+    e.preventDefault();
+    tile.position = '1'; // Right side
+    Helpers.loadNextModel(tile.urn, tile.position)
+  }
+
+   onLeftSelect (tile, e){
+    e.preventDefault();
+    tile.position = '2'; // Left side
+    Helpers.loadNextModel(tile.urn, tile.position)
   }
 
    render() {
@@ -55,10 +70,21 @@ class Gallery extends Component {
             {tilesData.map((tile, index) =>
               (
                 <div className="tile" key={index}>
-                  <a href="#" onClick={this.onTileSelect.bind(this, tile)}>
-                    <img className="tile-avatar" src={tile.img} alt={tile.title} />
+                  <img className="tile-avatar" src={tile.img} alt={tile.title} />
+                  <div className="tile-title">{tile.title}</div>
+                  
+                  <div className="tile-buttons"> 
+                  <a href="#" className="tile-arrows" onClick={this.onLeftSelect.bind(this, tile)}>
+                    <i className="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+                  </a> 
+                   <a href="#" className="tile-arrows" onClick={this.onTileSelect.bind(this, tile)}>
+                    <i className="fa fa-plus fa-2x" aria-hidden="true"></i>
+                  </a> 
+                  <a href="#"  onClick={this.onRightSelect.bind(this, tile)}>
+                     <i className="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
                   </a>
-                   <div className="tile-title">{tile.title}</div>
+                 </div>
+                
                 </div>
               )
             )}

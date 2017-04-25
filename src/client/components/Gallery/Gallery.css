@@ -1,12 +1,12 @@
 .forge-gallery {
   position: absolute;
   z-index: 2;
-  top: 30%;
+  top: 23%;
   left: 1%; }
 
 .forge-gallery .tile {
   border-radius: 5px;
-  margin-bottom: 0.8em;
+  margin-bottom: 3em;
   position: relative; }
 
 .forge-gallery .tile .tile-avatar {
@@ -16,14 +16,28 @@
   max-width: 100%; }
 
 .forge-gallery .tile .tile-title {
-  bottom: 0;
+  top: 0;
   width: calc(100%);
-  background-color: rgba(80, 80, 80, 0.5);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  bottom: 0;
+  background-color: rgba(80, 80, 80, 0.05);
   color: white;
   font-size: 1em;
   padding: .6em .8em;
   position: absolute;
   text-shadow: 1px 1px 1px black; }
+
+.forge-gallery .tile .tile-buttons {
+  bottom: 0;
+  width: calc(100%);
+  background-color: rgba(80, 80, 80, 0.2);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: white;
+  font-size: 1em;
+  padding: 0.5em .8em;
+  position: absolute; }
+
+a {
+  color: hotpink; }
+
+.tile-arrows {
+  margin-right: 3.4em; }
