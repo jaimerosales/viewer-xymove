@@ -22,6 +22,7 @@ import EventTool from '../Viewer.EventTool/Viewer.EventTool'
 
 var viewer;
 var pointer;
+var modelSide;
 
 var getToken = { accessToken: Client.getaccesstoken()};
 var pointData ={};
@@ -118,7 +119,7 @@ function onGeometryLoadedHandler(event) {
 }
 
 
-function loadNextModel(documentId) {
+function loadNextModel(documentId, modelPosition ) {
      const extInstance = viewer.getExtension(ModelTransformerExtension);
      const pickVar = extInstance.panel;
 
@@ -132,6 +133,7 @@ function loadNextModel(documentId) {
         pickVar.tooltip.activate();
     }
     else{
+        modelSide = modelPosition;
         Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
         pickVar.tooltip.deactivate();
     }
@@ -167,6 +169,76 @@ function serverTransform(){
  
 }
 
+
+
+function serverTransformRight(translationValue, rotationValue, modelCode){
+   
+        var transform = {
+            translation: translationValue,
+            rotation: rotationValue,
+            scale: new THREE.Vector3(0.003, 0.003, 0.003)
+        }
+        switch ( modelCode === "1" ) {
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 0.0  && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x , transform.translation.y + 2 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 90.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x - 2  , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 180.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x , transform.translation.y - 2 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 270.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x + 2  , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            default: 
+                console.log('Enter an Angle equal to 0, 90, 180, 270 in the Y Axis');
+        }
+
+        return transform;
+ 
+}
+
+function serverTransformLeft(translationValue, rotationValue, modelCode){
+   
+        var transform = {
+            translation: translationValue,
+            rotation: rotationValue,
+            scale: new THREE.Vector3(0.003, 0.003, 0.003)
+        }
+       
+        switch ( modelCode === "2" ) {
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 0.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x , transform.translation.y -2 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 90.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x + 2 , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 180.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x , transform.translation.y + 2 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 90.0 && transform.rotation.y === 270.0 && transform.rotation.z === 0.0):
+                transform.translation = new THREE.Vector3(transform.translation.x - 2 , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            default: 
+                console.log('Enter an Angle equal to 0, 90, 180, 270 in the Y Axis');
+        }
+
+        return transform;
+ 
+}
+
+
+
+
 function cabinetTransform(){
    
         var transform = {
@@ -186,6 +258,82 @@ function cabinetTransform(){
  
 }
 
+function cabinetTransformRight(translationValue, rotationValue, modelCode){
+   
+        var transform = {
+            translation: translationValue,
+            rotation: rotationValue,
+            scale: new THREE.Vector3(0.0025,0.0025,0.0025)
+        }
+
+        switch ( modelCode === "1" ) {
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0  && transform.rotation.z === 0.0):
+                console.log('0 z degrees')
+                transform.translation = new THREE.Vector3(transform.translation.x + 3.5  , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 90.0):
+                console.log('90 z degrees')
+                transform.translation = new THREE.Vector3(transform.translation.x  , transform.translation.y + 3.5, transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 180.0):
+                console.log('180 z degrees')
+                transform.translation = new THREE.Vector3(transform.translation.x -3.5 , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 270.0):
+                console.log('270 z degrees')
+                transform.translation = new THREE.Vector3(transform.translation.x , transform.translation.y -3.5 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            default: 
+                console.log('Enter an Angle equal to 0, 90, 180, 270 in the Y Axis');
+        }
+
+        return transform;
+ 
+}
+
+function cabinetTransformLeft(translationValue, rotationValue, modelCode){
+   
+        var transform = {
+            translation: translationValue,
+            rotation: rotationValue,
+            scale: new THREE.Vector3(0.0025,0.0025,0.0025)
+        }
+
+        switch ( modelCode === "2" ) {
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0  && transform.rotation.z === 0.0):
+                console.log('0 z degrees left')
+                transform.translation = new THREE.Vector3(transform.translation.x - 3.5, transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 90.0):
+            console.log('90 z degrees left')
+                transform.translation = new THREE.Vector3(transform.translation.x  , transform.translation.y - 3.5 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 180.0):
+                console.log('180 z degrees left')
+                transform.translation = new THREE.Vector3(transform.translation.x + 3.5 , transform.translation.y , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            case (transform.rotation.x === 0.0 && transform.rotation.y === 0.0 && transform.rotation.z === 270.0):
+                console.log('270 z degrees left')
+                transform.translation = new THREE.Vector3(transform.translation.x  , transform.translation.y + 3.5 , transform.translation.z);
+                transform.rotation = new THREE.Vector3(transform.rotation.x , transform.rotation.y, transform.rotation.z);
+                break;
+            default: 
+                console.log('Enter an Angle equal to 0, 90, 180, 270 in the Y Axis');
+        }
+
+        return transform;
+ 
+}
+
+
+
 function loadModel(viewables, lmvDoc, indexViewable) {
 
     return new Promise(async(resolve, reject)=> {
@@ -204,14 +352,35 @@ function loadModel(viewables, lmvDoc, indexViewable) {
             case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3JhY2tfYXNzLmYzZA"):
                 
                 panel = viewer.getExtension(ModelTransformerExtension).panel;
-                panel.setTransform(serverTransform());
+                if (modelSide === '0'){
+                    panel.setTransform(serverTransform());
+                }
+                else if (modelSide === '1')
+                {
+                    panel.setTransform(serverTransformRight(panel.getTranslation(), panel.getRotation(), modelSide));
+                }
+                else if (modelSide === '2')
+                {
+                    panel.setTransform(serverTransformLeft(panel.getTranslation(), panel.getRotation(), modelSide));
+                }
                 panel.applyTransform(model);
                 modelName = "serverRack.f3d"    
                 break;
             case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L0NhYmluZXQuemlw"):
                 
                 panel = viewer.getExtension(ModelTransformerExtension).panel;
-                panel.setTransform(cabinetTransform()); 
+                debugger
+                if (modelSide === '0'){
+                    panel.setTransform(cabinetTransform());
+                }
+                else if (modelSide === '1')
+                {
+                    panel.setTransform(cabinetTransformRight(panel.getTranslation(), panel.getRotation(), modelSide));
+                }
+                else if (modelSide === '2')
+                {
+                    panel.setTransform(cabinetTransformLeft(panel.getTranslation(), panel.getRotation(), modelSide));
+                }
                 panel.applyTransform(model); 
                 modelName = "Cabinet.iam"
                 break;
