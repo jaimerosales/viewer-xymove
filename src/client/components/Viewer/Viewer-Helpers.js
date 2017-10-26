@@ -31,7 +31,6 @@ var pointData ={};
 
 /// WHY I'M USING GLOBAL VARIABLES, SIMPLE I'M SETTING UP WITH REACT-SCRIPTS FOR EASIER 3RD PARTY DEVELOPER USE OF PROJECT
 /// https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#using-global-variables
-
 const Autodesk = window.Autodesk;
 
 function launchViewer(documentId) {
@@ -82,7 +81,7 @@ function onDocumentLoadSuccess(doc) {
     viewer.addEventListener(Autodesk.Viewing.AGGREGATE_SELECTION_CHANGED_EVENT,onSelection);
     viewer.prefs.tag('ignore-producer');
     
-    viewer.impl.disableRollover(true);
+    //viewer.impl.disableRollover(true);
     viewer.loadExtension(ModelTransformerExtension, {
          parentControl: 'modelTools',
          autoLoad: true
@@ -118,6 +117,11 @@ function onGeometryLoadedHandler(event) {
         viewer.fitToView();
 }
 
+//////////////////////////////////////////////////////////////////////////
+// On Selection point Function
+//
+//////////////////////////////////////////////////////////////////////////
+
 
 function onSelection (event) {
     if (event.selections && event.selections.length) {
@@ -126,6 +130,7 @@ function onSelection (event) {
             pointer.canvasY,
             true)
     }
+    console.log(pointData);
 }
 
 
