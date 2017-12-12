@@ -113,7 +113,7 @@ function onGeometryLoadedHandler(event) {
                 onGeometryLoadedHandler);
         viewer.setQualityLevel(false,false);
         viewer.setGroundShadow(false);
-        viewer.showAll();
+        //viewer.showAll();
         viewer.fitToView();
 }
 
@@ -175,7 +175,6 @@ function loadModel(viewables, lmvDoc, indexViewable) {
             
             switch (lmvDoc.myData.status.toString() === "success" ) {
             case (lmvDoc.myData.guid.toString() === "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dmlld2VyLXJvY2tzLXJlYWN0L3JhY2tfYXNzLmYzZA"):
-                debugger
                 panel = viewer.getExtension(ModelTransformerExtension).panel;
                 if (modelSide === '0'){
                     panel.setTransform(RackMoveHelper.serverTransform(pointData));
